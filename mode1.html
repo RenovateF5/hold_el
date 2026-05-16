@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode 1</title>
+    <link rel="stylesheet" href="mode1.css" />
+</head>
+<body>
+    <div id="ball"></div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        let timer = null;
+        let countdown = null;
+
+        function moveBall() {
+            const ball = document.getElementById('ball');
+            if (!ball) return;
+
+            const maxX = window.innerWidth - 60;
+            const maxY = window.innerHeight - 60;
+            const x = Math.floor(Math.random() * maxX);
+            const y = Math.floor(Math.random() * maxY);
+
+            ball.style.left = x + 'px';
+            ball.style.top = y + 'px';
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            moveBall();
+            timer = setInterval(moveBall, 2000);
+
+            countdown = setTimeout(() => {
+                clearInterval(timer);
+                timer = null;
+                ipcRenderer.send('switch-mode', 'main');
+            }, 60000);
+        });
+    </script>
+</body>
+</html>

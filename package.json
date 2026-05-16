@@ -1,0 +1,42 @@
+{
+  "name": "hole_el",
+  "version": "1.0.0",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:all": "electron-builder --win --mac"
+  },
+  "build": {
+    "appId": "com.example.hole_el",
+    "productName": "Hole Eye",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron-main.js",
+      "index.html",
+      "mode1.html",
+      "mode2.html",
+      "mode3.html",
+      "main.js",
+      "styles.css",
+      "mode1.css",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    }
+  },
+  "devDependencies": {
+    "electron": "^41.6.1",
+    "electron-builder": "^26.8.1"
+  }
+}
